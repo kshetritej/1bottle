@@ -6,8 +6,8 @@ export interface productCardPropsTypes {
     description: string
     rating: number
     brand: string
-    voluem: string
-    abv: number
+    weight: number
+    sugar: number
     categoryId: string
     price: number
     stockQuantity: number
@@ -16,7 +16,7 @@ export interface productCardPropsTypes {
 
 
 export type ProductResponse = {
-  abv: number;
+  sugar: number;
   ageRestriction: number;
   brand: string;
   category: string | null;
@@ -31,7 +31,7 @@ export type ProductResponse = {
   rating: number;
   stockQuantity: number;
   updatedAt: string;
-  volume: number;
+  weight: number;
 };
 
 export type Product = {
@@ -40,8 +40,8 @@ export type Product = {
     imageUrl: string;
     description: string;
     brand: string;
-    volume: number;
-    abv: number;
+    weight: number;
+    sugar: number;
     categoryId?: string;
     price: number;
     stockQuantity: number;

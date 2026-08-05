@@ -10,7 +10,7 @@ export default function ProductSuggestion() {
     return (
         <div className="container  mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold">You may also like</h2>
+                <h2 className="text-2xl font-bold text-[#31B65D]">You may also like</h2>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                 {suggestedProducts?.map((item: productCardPropsTypes) => (
@@ -21,7 +21,7 @@ export default function ProductSuggestion() {
                                         <img src={item.imageUrl} alt={item.name} className="w-full h-full object-fit mb-2 rounded" />
                                     </div>
                                 <h3 className="font-semibold">{item.name}</h3>
-                                <p className="text-orange-500 py-4 text-sm font-black">${item.price.toFixed(2)}</p>
+                                <p className="text-[#31B65D] py-4 text-sm font-black">${item.price.toFixed(2)}</p>
                             </CardContent>
                         </Card>
                     </Link>

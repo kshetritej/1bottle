@@ -25,7 +25,7 @@ export function CategoryTable() {
                         <CreateCategoryModal />
                     </div>
                     <Table>
-                        <TableCaption>A list of categories. One Bottle Liquiors.</TableCaption>
+                        <TableCaption>A list of categories. The Little Baker.</TableCaption>
                         <TableHeader>
                             <TableRow>
                                 <TableHead >Name</TableHead>

@@ -8,8 +8,8 @@ namespace OneBottle.Models
 		public string Description { get; set; } = string.Empty;
 		public int Rating { get; set; }
 		public string Brand { get; set; } = string.Empty;
-		public int Volume { get; set; }
-		public decimal ABV { get; set; }
+		public int Weight { get; set; }
+		public decimal Sugar { get; set; }
 		public Guid? CategoryId { get; set; }
 		public Category? Category { get; set; }
 		public decimal Price { get; set; }

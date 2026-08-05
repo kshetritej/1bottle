@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using OneBottle.Data;
 using OneBottle.DTOs.Admin;
 using OneBottle.Interfaces;
@@ -67,7 +66,7 @@ namespace OneBottle.Controller
             // var adminModel = AdminMappers.ToAdminModel(adminDTO);
             // await _adminRepo.AddAdminAsync(adminModel);
             // var createdAdminDTO = AdminMappers.CreateToAdminDTO(adminModel);
-            // return CreatedAtAction(nameof(GetById), new { adminId = adminModel.AdminId }, createdAdminDTO); //toadminDTO defination is not found 
+            // return CreatedAtAction(nameof(GetById), new { adminId = adminModel.AdminId }, createdAdminDTO); //toadminDTO defination is not found
         }
 
         [HttpPost("/api/admin/login")]
@@ -95,7 +94,7 @@ namespace OneBottle.Controller
             }
             existingAdmin.Username = newAdmin.Username;
             existingAdmin.Email = newAdmin.Email;
-            existingAdmin.Password = newAdmin.Password; 
+            existingAdmin.Password = newAdmin.Password;
 
             // var admin = AdminMappers.ToAdminModelFromUpdate(newAdmin, Id);
             await _adminRepo.UpdateAdminAsync(existingAdmin);

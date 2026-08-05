@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import Feedbacks from "../../components/product/product-feedbacks";
 import ProductSuggestion from "../../components/product/product-suggestion";
 import { useGetFeedbacksByProductId, useGetProductById } from "../../../queries/queries";
-import { CartItem } from "../user/cart";
-import { atom, useRecoilState } from "recoil";
+import { CartItem, cartListState } from "../../../utils/cart-atom";
+import { useRecoilState } from "recoil";
 import { toast } from "../../../hooks/use-toast";
 import { Card } from "../../../components/ui/card";
 import { DynamicBreadcrumb } from "../../../utils/dynamic-breadcrumb";
@@ -39,13 +39,6 @@ export function ProductDescription() {
     const product = useGetProductById(productId[0]).data?.data;
     const [quantity, setQuantity] = useState(1);
 
-    const initialCart = JSON.parse(localStorage.getItem('cart') || '[]') as CartItem[];
-
-    const cartListState = atom<CartItem[]>({
-        key: 'CartList',
-        default: initialCart
-    });
-
     const [cartList, setCartList] = useRecoilState(cartListState);
 
     function addToCart(newItem: CartItem) {
@@ -77,13 +70,13 @@ export function ProductDescription() {
             <Card className="p-4 border-none container mx-auto  py-8">
                 <DynamicBreadcrumb />
                 <div className="p-4 grid md:grid-cols-2 gap-8 mt-4">
-                    <div className="max-w-[520px] mx-auto">
+                    <div className="max-w-[520px] mx-auto bg-slate-200 rounded-2xl p-5">
                         <img
                             src={product?.imageUrl}
                             alt={product?.name}
                             width={500}
                             height={500}
-                            className="rounded-lg"
+                            className="rounded-xl object-contain w-full h-full"
                         />
                     </div>
                     <div>
@@ -102,7 +95,7 @@ export function ProductDescription() {
                                 ({feedback?.length}) Reviews
                             </span>
                         </div>
-                        <p className="text-2xl font-bold mb-4">${product?.price}</p>
+                        <p className="text-2xl font-bold mb-4 text-[#31B65D]">${product?.price}</p>
                         <p className="mb-4">{product?.description}</p>
                         <div className="flex items-center space-x-4 mb-4">
                             <Button
@@ -120,7 +113,7 @@ export function ProductDescription() {
                                 <Plus className="h-4 w-4" />
                             </Button>
                         </div>
-                        <Button className="w-full mb-4"
+                        <Button className="w-full mb-4 bg-[#31B65D] hover:bg-[#31B65D]/90"
                             onClick={() => {
                                 return addToCart({ productId: product.productId, name: product.name, imageUrl: product.imageUrl, price: product.price, quantity: quantity })
                             }}
@@ -130,7 +123,7 @@ export function ProductDescription() {
                             navigate({
                                 to: "/cart"
                             })
-                        }} variant="secondary" className="w-full mb-4"> Buy Now
+                        }} variant="secondary" className="w-full mb-4 bg-[#31B65D]/10 text-[#31B65D] hover:bg-[#31B65D]/20"> Buy Now
                         </Button>
                         <div className="flex space-x-4 mb-4">
                             <span>Share:</span>
@@ -146,8 +139,8 @@ export function ProductDescription() {
                         </div>
                         <h3 className="font-semibold mb-2">Details</h3>
                         <ul className="space-y-1">
-                            <li>ABV: {product?.abv}/100mL</li>
-                            <li>Volume : {product?.volume} mL</li>
+                            <li>Sugar: {product?.sugar}g</li>
+                            <li>Weight : {product?.weight} g</li>
                             <li>Brand : {product?.brand}</li>
                         </ul>
                     </div>

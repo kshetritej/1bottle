@@ -45,7 +45,7 @@ export default function Feedbacks({ feedbacks, userId, productId }: { feedbacks:
             <Textarea {...register("comment")} placeholder="Leave a nice comment." rows={5} />
             {errors.comment && <span className="text-red-500">{errors.comment.message} </span>}
             <div>
-              <Button type="submit">Post Review</Button>
+              <Button type="submit" className="bg-[#31B65D] hover:bg-[#31B65D]/90">Post Review</Button>
             </div>
           </form>
         </CardContent>

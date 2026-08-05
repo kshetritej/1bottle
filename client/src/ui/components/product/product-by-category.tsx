@@ -15,14 +15,16 @@ export function ProductByCategory() {
     return (
         <div className="px-5 flex flex-col gap-4 py-4">
             <div className="flex items-center gap-4">
-                <h2 className="font-bold flex gap-2 items-center"><Shapes/> {categoryName} </h2>
+                <h2 className="font-bold flex gap-2 items-center text-[#31B65D] text-2xl"><Shapes /> {categoryName} </h2>
             </div>
             {
-                product && product?.length > 0 ? product.map(
-                    (item: productCardPropsTypes) =>
-                        <>
-                            <ProductCard key={item.productId} product={item} />
-                        </>
+                product && product?.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
+                        {product.map(
+                            (item: productCardPropsTypes) =>
+                                <ProductCard key={item.productId} product={item} />
+                        )}
+                    </div>
                 ) :
                     <p className="text-center">No items available for this category.</p>
             }

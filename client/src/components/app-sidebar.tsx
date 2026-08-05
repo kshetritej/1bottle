@@ -24,14 +24,12 @@ import {
 } from "./ui/alert-dialog"
 import { Button } from "./ui/button"
 import { menuItems as items } from "../constants/menuList"
-import { Beer, ChevronDown, ChevronsUpDown, LogOut, Settings, Shield, Sparkles } from "lucide-react"
+import { ChevronsUpDown, Croissant, LogOut, Shield, Sparkles } from "lucide-react"
 import { Avatar, AvatarFallback } from "./ui/avatar"
 import { DropdownMenuGroup, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { useIsMobile } from "../hooks/use-mobile";
 import { useLogout } from "../queries/queries";
 import { Link } from "@tanstack/react-router"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./ui/collapsible"
-import { ModeToggle } from "./mode-toggle"
 
 export function AppSidebar() {
   const isMobile = useIsMobile();
@@ -47,11 +45,11 @@ export function AppSidebar() {
             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
           >
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-              <Beer className="size-4" />
+              <Croissant className="size-4" />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-semibold">
-                {'One Bottle Liquiors '}
+                {'The Little Baker '}
               </span>
               <span className="truncate text-xs">{'Management System'}</span>
             </div>
@@ -80,18 +78,6 @@ export function AppSidebar() {
           <SidebarGroupLabel>Setup</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem className="p-2">
-                <Collapsible>
-                  <CollapsibleTrigger>
-                    <div className="flex gap-2">
-                      <Settings size={16} /> <span>Settings</span> <ChevronDown size={16} />
-                    </div>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <ModeToggle />
-                  </CollapsibleContent>
-                </Collapsible>
-              </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton>
                   <Shield /> <span>Admins</span>

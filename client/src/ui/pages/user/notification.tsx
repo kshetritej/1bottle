@@ -44,7 +44,7 @@ export default function NotificationsPage() {
     return (
         <div className="container mx-auto p-4 max-w-2xl">
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">Notifications</h1>
+                <h1 className="text-2xl font-bold text-[#31B65D]">Notifications</h1>
                 <Badge variant="secondary">
                     {personalNotifications?.length + promotionalNotifications?.length} New
                 </Badge>

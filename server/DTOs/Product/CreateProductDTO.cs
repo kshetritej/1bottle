@@ -14,10 +14,10 @@ namespace OneBottle.DTOs.Product
         public string Description { get; set; } = string.Empty;
         public string Brand { get; set; } = string.Empty;
         [Required]
-        public int Volume { get; set; }
+        public int Weight { get; set; }
 
         [Required]
-        public decimal ABV { get; set; }
+        public decimal Sugar { get; set; }
         public Guid? CategoryId { get; set; }
         [Required]
         public decimal Price { get; set; } = 10;

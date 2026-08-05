@@ -122,7 +122,7 @@ export default function Checkout() {
         <div className="min-h-screen bg-background p-6">
             <div className="mx-auto max-w-6xl space-y-8">
                 <div className="space-y-2">
-                    <h1 className="text-3xl font-bold">Checkout</h1>
+                    <h1 className="text-3xl font-bold text-[#31B65D]">Checkout</h1>
                     <p className="text-muted-foreground">Complete your purchase</p>
                 </div>
                 <form className="grid gap-8 lg:grid-cols-[1fr_400px]" onSubmit={handleSubmit(handleCheckout)}>
@@ -299,7 +299,7 @@ export default function Checkout() {
                                     <span>Total</span>
                                     <span>${total}</span>
                                 </div>
-                                <Button className="w-full" size="lg"
+                                <Button className="w-full bg-[#31B65D] hover:bg-[#31B65D]/90" size="lg"
                                     type="submit"
                                 >
                                     Place Order

@@ -1,2 +1,2 @@
-# 1 Bottle 
-A liquior retail shop.
+# The Little Baker
+A bakery retail shop.

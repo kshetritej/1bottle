@@ -15,8 +15,8 @@ namespace OneBottle.Mappers
                 Description = product.Description,
                 Rating = product.Rating,
                 Brand = product.Brand,
-                Volume = product.Volume,
-                ABV = product.ABV,
+                Weight = product.Weight,
+                Sugar = product.Sugar,
                 CategoryId = product.CategoryId,
                 Price = product.Price,
                 StockQuantity = product.StockQuantity,
@@ -32,8 +32,8 @@ namespace OneBottle.Mappers
                 ImageUrl = productDTO.ImageUrl,
                 Description = productDTO.Description,
                 Brand = productDTO.Brand,
-                Volume = productDTO.Volume,
-                ABV = productDTO.ABV,
+                Weight = productDTO.Weight,
+                Sugar = productDTO.Sugar,
                 StockQuantity = productDTO.StockQuantity,
                 Price = productDTO.Price,
                 CategoryId = productDTO.CategoryId,
@@ -59,9 +59,9 @@ namespace OneBottle.Mappers
             {
                 product.ImageUrl= productDto.ImageUrl;
             }
-            if (productDto.Volume.HasValue)
+            if (productDto.Weight.HasValue)
             {
-                product.Volume= productDto.Volume.Value;
+                product.Weight= productDto.Weight.Value;
             }
             if (productDto.Price.HasValue)
             {

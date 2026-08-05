@@ -1,4 +1,4 @@
-import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from "../../../components/ui/dialog";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "../../../components/ui/dialog";
 import { DialogHeader } from "../../../components/ui/dialog";
 import { Edit2, PlusCircle } from "lucide-react";
 import { Button } from "../../../components/ui/button";
@@ -21,8 +21,8 @@ type ProductProps = {
         imageUrl: string;
         description: string;
         brand: string;
-        volume: number;
-        abv: number;
+        weight: number;
+        sugar: number;
         categoryId?: string;
         price: number;
         stockQuantity: number;
@@ -36,8 +36,8 @@ const productSchema = z.object({
     imageUrl: z.string().url({ message: "Invalid URL format" }),
     description: z.string().min(1, { message: "Description is required" }),
     brand: z.string().min(1, { message: "Brand is required" }),
-    volume: z.number().min(1, { message: "Volume must be greater than 0" }),
-    abv: z.number().min(0).max(100, { message: "ABV must be between 0 and 100" }),
+    weight: z.number().min(1, { message: "Weight must be greater than 0" }),
+    sugar: z.number().min(0).max(100, { message: "Sugar must be between 0 and 100" }),
     categoryId: z.string().min(0),
     price: z.number().min(0, { message: "Price must be a positive number" }),
     stockQuantity: z.number().min(1, { message: "Stock Quantity must be at least 1" }),
@@ -52,8 +52,8 @@ export function CreateProductModal({ product, mode, open }: ProductProps) {
             imageUrl: mode ? product?.imageUrl : "",
             description: mode ? product?.description : "",
             brand: mode ? product?.brand : "",
-            volume: mode ? product?.volume : 0,
-            abv: mode ? product?.abv : 0,
+            weight: mode ? product?.weight : 0,
+            sugar: mode ? product?.sugar : 0,
             categoryId: mode ? product?.categoryId : "",
             price: mode ? product?.price : 0,
             stockQuantity: mode ? product?.stockQuantity : 1
@@ -145,14 +145,14 @@ export function CreateProductModal({ product, mode, open }: ProductProps) {
                             <fieldset className="border p-4 col-span-2 grid md:grid-cols-2 gap-4">
                                 <legend className="sm:col-span-2 font-semibold">Product Specifications</legend>
                                 <div>
-                                    <Label htmlFor="volume">Volume</Label>
-                                    <Input {...register("volume", { valueAsNumber: true })} type="number" name="volume" />
-                                    {errors.volume && <span className="text-red-600">{errors.volume.message}</span>}
+                                    <Label htmlFor="weight">Weight (g)</Label>
+                                    <Input {...register("weight", { valueAsNumber: true })} type="number" name="weight" />
+                                    {errors.weight && <span className="text-red-600">{errors.weight.message}</span>}
                                 </div>
                                 <div>
-                                    <Label htmlFor="abv">ABV (Alcohol By Volume)</Label>
-                                    <Input {...register("abv", { valueAsNumber: true })} type="number" name="abv" />
-                                    {errors.abv && <span className="text-red-600">{errors.abv.message}</span>}
+                                    <Label htmlFor="sugar">Sugar (g)</Label>
+                                    <Input {...register("sugar", { valueAsNumber: true })} type="number" name="sugar" />
+                                    {errors.sugar && <span className="text-red-600">{errors.sugar.message}</span>}
                                 </div>
                             </fieldset>
 

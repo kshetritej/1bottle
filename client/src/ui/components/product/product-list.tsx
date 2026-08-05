@@ -29,8 +29,8 @@ export function ProductTable() {
                                 <TableHead>Image</TableHead>
                                 <TableHead>Name</TableHead>
                                 <TableHead>Brand</TableHead>
-                                <TableHead>Volume</TableHead>
-                                <TableHead>ABV</TableHead>
+                                <TableHead>Weight</TableHead>
+                                <TableHead>Sugar</TableHead>
                                 <TableHead>Price</TableHead>
                                 <TableHead>Stock</TableHead>
                                 <TableHead>Actions</TableHead>
@@ -42,8 +42,8 @@ export function ProductTable() {
                                     <TableCell className="font-medium"><img src={product.imageUrl} alt={product.name} className="w-20 h-20" /></TableCell>
                                     <TableCell className="font-medium">{product.name}</TableCell>
                                     <TableCell>{product.brand}</TableCell>
-                                    <TableCell>{product.volume} ml</TableCell>
-                                    <TableCell>{product.abv}%</TableCell>
+                                    <TableCell>{product.weight} g</TableCell>
+                                    <TableCell>{product.sugar}g</TableCell>
                                     <TableCell>${product.price}</TableCell>
                                     <TableCell>{product.stockQuantity}</TableCell>
                                     <TableCell className="flex gap-4">

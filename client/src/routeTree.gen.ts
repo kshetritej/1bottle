@@ -13,6 +13,8 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as WishlistImport } from './routes/wishlist'
+import { Route as TrendingImport } from './routes/trending'
 import { Route as NotificationsImport } from './routes/notifications'
 import { Route as MeImport } from './routes/me'
 import { Route as CheckoutImport } from './routes/checkout'
@@ -43,6 +45,16 @@ const AboutLazyRoute = AboutLazyImport.update({
   path: '/about',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+
+const WishlistRoute = WishlistImport.update({
+  path: '/wishlist',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const TrendingRoute = TrendingImport.update({
+  path: '/trending',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const NotificationsRoute = NotificationsImport.update({
   path: '/notifications',
@@ -185,6 +197,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotificationsImport
       parentRoute: typeof rootRoute
     }
+    '/trending': {
+      id: '/trending'
+      path: '/trending'
+      fullPath: '/trending'
+      preLoaderRoute: typeof TrendingImport
+      parentRoute: typeof rootRoute
+    }
+    '/wishlist': {
+      id: '/wishlist'
+      path: '/wishlist'
+      fullPath: '/wishlist'
+      preLoaderRoute: typeof WishlistImport
+      parentRoute: typeof rootRoute
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -295,6 +321,8 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRoute
   '/me': typeof MeRoute
   '/notifications': typeof NotificationsRoute
+  '/trending': typeof TrendingRoute
+  '/wishlist': typeof WishlistRoute
   '/about': typeof AboutLazyRoute
   '/admin/auth': typeof AdminAuthRoute
   '/admin/dashboard': typeof AdminDashboardRoute
@@ -318,6 +346,8 @@ export interface FileRoutesByTo {
   '/checkout': typeof CheckoutRoute
   '/me': typeof MeRoute
   '/notifications': typeof NotificationsRoute
+  '/trending': typeof TrendingRoute
+  '/wishlist': typeof WishlistRoute
   '/about': typeof AboutLazyRoute
   '/admin/auth': typeof AdminAuthRoute
   '/admin/dashboard': typeof AdminDashboardRoute
@@ -342,6 +372,8 @@ export interface FileRoutesById {
   '/checkout': typeof CheckoutRoute
   '/me': typeof MeRoute
   '/notifications': typeof NotificationsRoute
+  '/trending': typeof TrendingRoute
+  '/wishlist': typeof WishlistRoute
   '/about': typeof AboutLazyRoute
   '/admin/auth': typeof AdminAuthRoute
   '/admin/dashboard': typeof AdminDashboardRoute
@@ -367,6 +399,8 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/me'
     | '/notifications'
+    | '/trending'
+    | '/wishlist'
     | '/about'
     | '/admin/auth'
     | '/admin/dashboard'
@@ -389,6 +423,8 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/me'
     | '/notifications'
+    | '/trending'
+    | '/wishlist'
     | '/about'
     | '/admin/auth'
     | '/admin/dashboard'
@@ -411,6 +447,8 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/me'
     | '/notifications'
+    | '/trending'
+    | '/wishlist'
     | '/about'
     | '/admin/auth'
     | '/admin/dashboard'
@@ -435,6 +473,8 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRoute
   MeRoute: typeof MeRoute
   NotificationsRoute: typeof NotificationsRoute
+  TrendingRoute: typeof TrendingRoute
+  WishlistRoute: typeof WishlistRoute
   AboutLazyRoute: typeof AboutLazyRoute
   AdminAuthRoute: typeof AdminAuthRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
@@ -458,6 +498,8 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   MeRoute: MeRoute,
   NotificationsRoute: NotificationsRoute,
+  TrendingRoute: TrendingRoute,
+  WishlistRoute: WishlistRoute,
   AboutLazyRoute: AboutLazyRoute,
   AdminAuthRoute: AdminAuthRoute,
   AdminDashboardRoute: AdminDashboardRoute,
@@ -492,6 +534,8 @@ export const routeTree = rootRoute
         "/checkout",
         "/me",
         "/notifications",
+        "/trending",
+        "/wishlist",
         "/about",
         "/admin/auth",
         "/admin/dashboard",
@@ -525,6 +569,12 @@ export const routeTree = rootRoute
     },
     "/notifications": {
       "filePath": "notifications.tsx"
+    },
+    "/trending": {
+      "filePath": "trending.tsx"
+    },
+    "/wishlist": {
+      "filePath": "wishlist.tsx"
     },
     "/about": {
       "filePath": "about.lazy.tsx"

@@ -47,6 +47,13 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    OneBottle.Data.Seeder.Seed(db);
+}
+
 app.UseHttpsRedirection();
 app.UseCors("AllowAllOriginsPolicy");
 // Configure the HTTP request pipeline.

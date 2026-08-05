@@ -1,36 +1,19 @@
-import { ShoppingCart } from 'lucide-react'
+import { Heart, ShoppingCart } from 'lucide-react'
 import { Button } from "../../../components/ui/button"
-import { Card, CardContent, CardFooter } from "../../../components/ui/card"
-import { Badge } from '../../../components/ui/badge'
+import { Card } from "../../../components/ui/card"
 import { productCardPropsTypes } from '../../../types/product'
-import { useGetCategoryById } from '../../../queries/queries'
-import { atom, useRecoilState } from "recoil"
+import { CartItem, cartListState } from '../../../utils/cart-atom'
+import { WishlistItem, wishlistState } from '../../../utils/wishlist-atom'
+import { useRecoilState } from "recoil"
 import { useEffect } from 'react'
 import { Link } from '@tanstack/react-router'
 import { toast } from '../../../hooks/use-toast'
 import { cn } from '../../../lib/utils'
 
-type CartItem = {
-    productId: string,
-    name: string,
-    imageUrl: string,
-    price: number,
-    quantity: number
-}
-
 export default function ProductCard({ product, classname }: { product: productCardPropsTypes, classname?: string }) {
-    const category = useGetCategoryById(product?.categoryId).data?.data?.name;
-
-    // Load the initial cart from local storage or default to an empty array
-    const initialCart = JSON.parse(localStorage.getItem('cart') || '[]') as CartItem[];
-
-    // Atom for the cart list, using Recoil state
-    const cartListState = atom<CartItem[]>({
-        key: 'CartList',
-        default: initialCart
-    });
-
     const [cartList, setCartList] = useRecoilState(cartListState);
+    const [wishlist, setWishlist] = useRecoilState(wishlistState);
+    const isWishlisted = wishlist.some(item => item.productId === product.productId);
 
     function addToCart(newItem: CartItem) {
         const existingProduct = cartList.find(item => item.productId === newItem.productId);
@@ -50,47 +33,53 @@ export default function ProductCard({ product, classname }: { product: productCa
         }
     }
 
-    // Save cart to local storage whenever the cart list changes
+    function toggleWishlist(newItem: WishlistItem) {
+        const updatedWishlist = isWishlisted
+            ? wishlist.filter(item => item.productId !== newItem.productId)
+            : [...wishlist, newItem];
+        setWishlist(updatedWishlist);
+        toast({
+            title: isWishlisted ? 'Removed from wishlist' : 'Added to wishlist',
+            variant: isWishlisted ? "warning" : "success"
+        });
+    }
+
+    // Save cart and wishlist to local storage whenever they change
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cartList));
     }, [cartList]);
 
+    useEffect(() => {
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    }, [wishlist]);
+
     return (
-        <>
-            <Card className={cn("max-w-sm mx-auto overflow-hidden flex flex-col justify-between", classname)}>
-                <CardContent className="p-4">
-                    <Link key={product.productId} to={`/product/${product.productId}`}>
-                        <div className="relative size-[350px] overflow-hidden rounded-lg">
-                            <img
-                                src={product?.imageUrl}
-                                className='object-fit h-full w-full'
-                                alt={product?.name} />
-                            <Badge className="absolute top-2 right-2 bg-primary text-primary-foreground">{category}</Badge>
-                        </div>
-                        <h3 className="text-lg font-semibold mb-1 sm:text-xl">{product?.name}</h3>
-                        <p className="text-sm text-gray-600 mb-3 line-clamp-2 sm:text-base">
-                            {product?.description}
-                        </p>
-                    </Link>
-                    <div className="flex justify-between">
-                        <Link key={product.productId} to={`/product/${product.productId}`}>
-                            <div className='flex items-center'>
-                                <span className="text-2xl text-orange-500 font-bold sm:text-3xl">${product?.price + ".00"}</span>
-                            </div>
-                        </Link>
-                        <Button size="sm" className="sm:hidden mt-2"
-                            onClick={() => addToCart({ productId: product.productId, name: product.name, imageUrl: product.imageUrl, price: product.price, quantity: 1 })}>
-                            <ShoppingCart className="h-4 w-4" />
-                        </Button>
-                    </div>
-                </CardContent>
-                <CardFooter className="p-4 pt-0 hidden sm:block">
-                    <Button className="w-full"
-                        onClick={() => addToCart({ productId: product.productId, name: product.name, imageUrl: product.imageUrl, price: product.price, quantity: 1 })}>
-                        <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
-                    </Button>
-                </CardFooter>
-            </Card>
-        </>
+        <Card className={cn("relative p-4 flex flex-col items-center justify-between gap-3 border rounded-lg hover:scale-105 hover:shadow-md transition-all ease-in-out", classname)}>
+            <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-3 right-3 z-10 bg-white rounded-full shadow"
+                onClick={() => toggleWishlist({ productId: product.productId, name: product.name, imageUrl: product.imageUrl, price: product.price })}
+            >
+                <Heart className={`h-5 w-5 ${isWishlisted ? "text-[#31B65D] fill-current" : "text-gray-400"}`} />
+            </Button>
+            <Link to={`/product/${product.productId}`} className="flex flex-col items-center gap-3 w-full">
+                <div className="h-[200px] w-[200px] flex items-center justify-center bg-slate-100 rounded-lg overflow-hidden">
+                    <img
+                        src={product?.imageUrl}
+                        alt={product?.name}
+                        className="h-[180px] w-[180px] object-contain" />
+                </div>
+                <h3 className="font-bold text-lg text-center line-clamp-2">{product?.name}</h3>
+                <p className="text-[#31B65D] font-bold text-lg">${product?.price.toFixed(2)}</p>
+            </Link>
+            <Button
+                variant="outline"
+                className="w-full border-[#31B65D] text-[#31B65D] hover:text-white hover:bg-[#31B65D]"
+                onClick={() => addToCart({ productId: product.productId, name: product.name, imageUrl: product.imageUrl, price: product.price, quantity: 1 })}
+            >
+                <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
+            </Button>
+        </Card>
     )
 }

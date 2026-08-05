@@ -4,6 +4,7 @@ import ProductCard from './product-card'
 import { Category } from '../../pages/landing-page/homepage'
 import { useGetCategories, useGetProducts } from '../../../queries/queries'
 import { Product, productCardPropsTypes } from '../../../types/product'
+import { cn } from '../../../lib/utils'
 
 export default function ProductCatalog() {
     useEffect(() => {
@@ -19,13 +20,13 @@ export default function ProductCatalog() {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-6 text-center sm:text-left">Product Catalog</h1>
+            <h1 className="text-3xl font-bold mb-6 text-center sm:text-left text-[#31B65D]">Product Catalog</h1>
 
             <div className="grid  p-4 grid-cols-2 lg:grid-cols-8 gap-4 ">
                 <Button
                     onClick={() => setSelectedCategory(null)}
                     variant={selectedCategory === null ? "default" : "outline"}
-                    className="flex-shrink-0"
+                    className={cn("flex-shrink-0", selectedCategory === null && "bg-[#31B65D] hover:bg-[#31B65D]/90")}
                 >
                     All Products
                 </Button>
@@ -34,7 +35,7 @@ export default function ProductCatalog() {
                         key={category.categoryId}
                         onClick={() => setSelectedCategory(category.categoryId)}
                         variant={selectedCategory === category.categoryId ? "default" : "outline"}
-                        className="flex items-center justify-center truncate text-ellipsis max-w-full min-w-[100px] px-4 py-2"
+                        className={cn("flex items-center justify-center truncate text-ellipsis max-w-full min-w-[100px] px-4 py-2", selectedCategory === category.categoryId && "bg-[#31B65D] hover:bg-[#31B65D]/90")}
                     >
                         {category.name}
                     </Button>

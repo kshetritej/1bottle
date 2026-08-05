@@ -16,7 +16,6 @@ export function Cart() {
     const navigate = useNavigate();
     const savedCart = localStorage.getItem("cart")
     const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-        savedCart
         return savedCart ? JSON.parse(savedCart) : []
     })
 
@@ -50,7 +49,7 @@ export function Cart() {
                 <CardContent className='p-4 flex flex-col items-center h-[80vh] justify-center'>
                     <ShoppingBag size={42} />
                     <p className='text-center'>Your cart is empty.</p>
-                    <Button className="w-full mt-6" size="lg" onClick={() => {
+                    <Button className="w-full mt-6 bg-[#31B65D] hover:bg-[#31B65D]/90" size="lg" onClick={() => {
                         navigate({
                             to: "/",
                             replace: true,
@@ -69,7 +68,7 @@ export function Cart() {
                             <div className="flex flex-col gap-4">
                                 <div>
                                     <h2 className="font-semibold">{item.name}</h2>
-                                    <p className="text-yellow-500 font-bold ">${(item.price).toFixed(2)}</p>
+                                    <p className="text-[#31B65D] font-bold ">${(item.price).toFixed(2)}</p>
                                 </div>
                                 <div className="flex  rounded-md items-center">
                                     <div className='border p-1 rounded-lg mr-4'>
@@ -104,7 +103,7 @@ export function Cart() {
                         <h3 className="text-xl font-semibold">Total:</h3>
                         <p className="text-xl">${(totalPrice).toFixed(2)}</p>
                     </div>
-                    <Button className="w-full mt-6" size="lg" onClick={() => {
+                    <Button className="w-full mt-6 bg-[#31B65D] hover:bg-[#31B65D]/90" size="lg" onClick={() => {
                         console.log(cartItems)
                         navigate({
                             to: "/checkout",

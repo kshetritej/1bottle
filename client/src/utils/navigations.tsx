@@ -1,4 +1,4 @@
-import { BellRing, Home, User, ShoppingBag, ShoppingCart, Flame, Heart } from "lucide-react";
+import { BellRing, Home, User, ShoppingCart, Flame, Heart } from "lucide-react";
 
 const isLoggedIn = true
 export const navigations = [

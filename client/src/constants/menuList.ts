@@ -1,5 +1,5 @@
 import {
-  WineIcon,
+  Croissant,
   Shapes,
   Users2,
   LayoutDashboardIcon,
@@ -27,7 +27,7 @@ export const menuItems = [
   {
     title: "Products",
     url: "/admin/products",
-    icon: WineIcon,
+    icon: Croissant,
   },
   {
     title: "Orders",
